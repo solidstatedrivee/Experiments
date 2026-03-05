@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styling Missing Image</title>
+    <style>
+        :root {
+            color-scheme: dark;
+        }
+        body {
+            place-content: center;
+            place-items: center;
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            min-block-size: 100svh;
+        }
+        .cards-container {
+            max-inline-size: 85rem;
+            margin: 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .card {
+            background: rgb(47, 47, 47);
+            padding: 1rem;
+            border-radius: .25rem;
+        }
+
+        .card-image-container {
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            margin-block-end: 1rem;
+
+            img {
+                --card-bg-clr: rgb(47, 47, 47);
+                object-fit: cover;
+                inline-size: 100%;
+                block-size: 100%;
+                display: inline-block;
+                position: relative;
+            }
+        }
+
+        /* CSS */
+        @supports (x: attr(x type(*))) {
+            img[alt]:after {
+                content: "Could not find image 🫠: " attr(alt);
+                position: absolute;
+                inset: 0;
+                background: var(--card-bg-clr);
+                display: grid;
+                place-content: center;
+                border: .15rem dashed white;
+                font-weight: 100;
+            }
+    
+            img[alt=""]:after {
+                content: "Could not find image 🫠: How embarassing!";
+            }
+        }
+
+
+        .card-title {
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        .card-content {
+            font-weight: 300;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cards-container">
+        <div class="card">
+            <div class="card-image-container">
+                <img src="https://picsum.photos/500" alt="Random generated image">
+            </div>
+            <div class="card-title">In the heart</div>
+            <div class="card-content">
+                <p>
+                    Of the enchanted forest, where magic lingered in every shadow, the old oak tree stood.
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-image-container">
+                <img src="/path/to/image" alt="This card is using alt text">
+            </div>
+            <div class="card-title">The old oak tree</div>
+            <div class="card-content">
+                <p>
+                    In the village square was a living monument to the passage of time.
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-image-container">
+                <img src="/path/to/image" alt="">
+            </div>
+            <div class="card-title">Its sprawling branches</div>
+            <div class="card-content">
+                <p>
+                    Provided shade and shelter, its roots a testament to endurance and stability.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

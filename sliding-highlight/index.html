@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Highlight Example</title>
+    <style>
+        body {
+            display: grid;
+            place-content: center;
+            min-block-size: 100svh;
+            margin: 0;
+            font-family: system-ui;
+            background: #000;
+            color: #fff;
+            background-image: repeating-linear-gradient(
+                45deg,
+                #000,
+                #000 5px,
+                rgba(255 255 255 / 0.1) 5px,
+                rgba(255 255 255 / 0.1) 10px
+            );
+        }
+
+        .sliding-highlight-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            inline-size: 40rem;
+            position: relative;
+            &:hover {
+                .sliding-highlight {
+                    opacity: 1;
+                }
+            }
+            &:has(.sliding-highlight-item:nth-child(2):hover) {
+                .sliding-highlight {
+                    translate: 0 0;
+                }
+            }
+            &:has(.sliding-highlight-item:nth-child(3):hover) {
+                .sliding-highlight {
+                    translate: 100% 0;
+                }
+            }
+            &:has(.sliding-highlight-item:nth-child(4):hover) {
+                .sliding-highlight {
+                    translate: 0 100%;
+                }
+            }
+            &:has(.sliding-highlight-item:nth-child(5):hover) {
+                .sliding-highlight {
+                    translate: 100% 100%;
+                }
+            }
+        }
+
+        .sliding-highlight-item {
+            outline: 1px solid #efefef;
+            padding: 1rem;
+            box-sizing: border-box;
+            inline-size: 100%;
+            block-size: 100%;
+            aspect-ratio: 1/1;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            background: rgb(0 0 0 / .5);
+            svg {
+                inline-size: 1rem;
+                margin-top: auto;
+                transform: scaleX(-1);
+                transition: transform 300ms ease;
+                fill: #fff;
+            }
+            &:hover, &:focus-visible {
+                svg {
+                    transform: scaleX(1);
+                }
+            }
+        }
+
+        .sliding-highlight {
+            position: absolute;
+            inline-size: 50%;
+            block-size: 50%;
+            background: #3f3f3f;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 600ms ease, translate 300ms ease;
+        }
+
+        .sliding-highlight_header {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sliding-highlight-wrapper">
+        <div class="sliding-highlight"></div>
+        <div class="sliding-highlight-item">
+            <div class="sliding-highlight_header">Advances in Neuroimaging</div>
+            <p>The ongoing research in particle physics, including the work at CERN's Large Hadron Collider, continues
+                to explore the building blocks of the universe.</p>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                <path
+                    d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
+            </svg>
+        </div>
+        <div class="sliding-highlight-item">
+            <div class="sliding-highlight_header">Satellite Constellations</div>
+            <p>This field aims to create synthetic life forms and biological systems with novel properties and
+                functions.</p>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                <path
+                    d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
+            </svg>
+        </div>
+        <div class="sliding-highlight-item">
+            <div class="sliding-highlight_header">Quantum Computers</div>
+            <p>Astronomy and space science continue to captivate our imagination and expand our horizons.</p>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                <path
+                    d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
+            </svg>
+        </div>
+        <div class="sliding-highlight-item">
+            <div class="sliding-highlight_header">Marine Biodiversity</div>
+            <p>From Newton's laws of motion to Einstein's theory of relativity, our understanding of space, time, and
+                matter has deepened.</p>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                <path
+                    d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
+            </svg>
+        </div>
+    </div>
+</body>
+
+</html>

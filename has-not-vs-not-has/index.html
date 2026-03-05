@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --green: hsl(62, 23%, 24%);
+            --green--darker: hsl(65, 28%, 15%);
+            --green--darker--25: hsl(65 28% 15% / 0.25);
+            --green--darkest: hsl(30, 13%, 6%);
+            --green--lighter: hsl(49, 18%, 36%);
+            --green--lightest: hsl(70, 50%, 75%);
+            --accent-primary: hsl(1, 73%, 43%);
+            --accent-secondary: hsl(51, 81%, 54%);
+            color-scheme: light dark;
+        }
+
+        body {
+            margin: 0;
+            display: grid;
+            place-content: center;
+            min-block-size: 100vh;
+            background: var(--green--darkest);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-image: repeating-linear-gradient(
+                45deg,
+                var(--green--darkest),
+                var(--green--darkest) 8px,
+                var(--green--darker--25) 8px,
+                var(--green--darker--25) 16px
+            );
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-block-start: 1rem;
+        }
+
+        .card {
+            padding: .5rem;
+            border-radius: .25rem;
+            background: var(--green);
+            &:has(:not(img)) {
+                outline: 2px solid var(--accent-primary);
+            }
+            &:not(:has(img)) {
+                outline: 2px solid var(--accent-secondary);
+            }
+        }
+
+        .card_image {
+            img {
+                inline-size: 100%;
+                object-fit: cover;
+                border-radius: .25rem;
+            }
+            + .card_content .title {
+                margin-block-start: 1rem;
+            }
+        }
+
+        .card_content {
+            :where(p) {
+                margin: 0;
+            }
+        }
+
+        .title {
+            font-size: 1.25em;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-block: 0 .5rem;
+        }
+
+        .heading {
+            font-size: 1.5rem;
+            margin-block: 0 1rem;
+            inline-size: fit-content;
+            padding: .25rem 1rem;
+            border-radius: .25rem;
+            position: relative;
+            &[data-accent="primary"] {
+                background: var(--accent-primary);
+                &::before {
+                    background: var(--accent-primary);
+                }
+            }
+            &[data-accent="secondary"] {
+                background: var(--accent-secondary);
+                color: var(--green--darkest);
+                &::before {
+                    background: var(--accent-secondary);
+                }
+            }
+            &[data-accent]::before {
+                content: "";
+                block-size: 100%;
+                aspect-ratio: 1;
+                border-radius: 100%;
+                position: absolute;
+                right: 100%;
+                top: 0;
+                margin-inline-end: .5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <p class="heading" data-accent="primary">
+        <code>:has(:not(img))</code>
+    </p>
+    <p class="heading" data-accent="secondary">
+        <code>:not(:has(img))</code>
+    </p>
+    <div class="cards-container">
+        <div class="card">
+            <div class="card_image">
+                <img src="https://picsum.photos/500" alt="" />
+            </div>
+        </div>
+        <div class="card">
+            <div class="card_image">
+                <img src="https://picsum.photos/600" alt="" />
+            </div>
+            <div class="card_content">
+                <p class="title">Advances in robotics are paving</p>
+                <p>Neurotechnology is also advancing our understanding of the brain and its disorders, paving the way for new therapies.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card_content">
+                <p class="title">The study of microbiology focuses</p>
+                <p>Synthetic biology combines biology and engineering to design and construct new biological entities.</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

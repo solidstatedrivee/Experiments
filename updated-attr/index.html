@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updated attr() function in CSS</title>
+    <style>
+        :root {
+            color-scheme: light dark;
+        }
+
+        body {
+            display: grid;
+            place-content: center;
+            min-block-size: 100svh;
+            margin: 0;
+            margin-inline: 5rem;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+        }
+
+        .card-wrapper {
+            display: grid;
+            grid-template-columns: 
+                repeat(attr(data-columns type(<number>), 2), 1fr);
+            gap: 1rem;
+        }
+
+        .card {
+            background: rgb(33, 33, 33);
+            padding: 1.5rem;
+            span{
+                background: rgb(214, 214, 214);
+                color: rgb(33, 33, 33);
+                padding: .25rem .75rem;
+                border-radius: 1rem;
+                font-size: .875rem;
+                font-weight: 200;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h2>The future of space exploration, including missions to Mars and beyond, holds exciting prospects for humanity
+    </h2>
+    <div class="card-wrapper" data-columns="4">
+        <div class="card">
+            <span>Paleontology</span>
+            <h3>Discoveries of dinosaur fossils and</h3>
+            <p>Machine learning algorithms can analyze vast amounts of data, identify patterns, and make predictions
+            with remarkable accuracy</p>
+        </div>
+        <div class="card">
+            <span>Astronomy</span>
+            <h3>Exploring distant exoplanets</h3>
+            <p>Advanced telescopes allow scientists to detect new worlds and study their atmospheres for signs of life.</p>
+        </div>
+        <div class="card">
+            <span>Robotics</span>
+            <h3>Innovations in automation</h3>
+            <p>Robots are increasingly used in manufacturing, healthcare, and even space missions to perform complex tasks.</p>
+        </div>
+        <div class="card">
+            <span>Genetics</span>
+            <h3>Mapping the human genome</h3>
+            <p>Genetic research is leading to breakthroughs in personalized medicine and the treatment of rare diseases.</p>
+        </div>
+        <div class="card">
+            <span>Climate Science</span>
+            <h3>Understanding global changes</h3>
+            <p>Scientists use data modeling to predict climate trends and develop strategies for sustainability.</p>
+        </div>
+        <div class="card">
+            <span>Quantum Computing</span>
+            <h3>Revolutionizing computation</h3>
+            <p>Quantum computers promise to solve problems that are currently intractable for classical computers.</p>
+        </div>
+    </div>
+</body>
+
+</html>

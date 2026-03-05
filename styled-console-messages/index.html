@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Console Messages</title>
+</head>
+
+<body>
+    <style>
+        h1 {
+            color: #515151;
+        }
+    </style>
+    <script>
+        console.log(
+            "%c❌ Error: Could not resolve API fetch request.",
+            "color: white; background: #a90b0b; font-weight: bold; padding: 2px 6px; border-radius: 2px;",
+        );
+        console.log(
+            "%c✅ There are no site alerts at this time.%c The alerts.js file will be empty.",
+            "color: white; background: green; font-weight: bold; padding: 4px 8px; border-radius: 4px;",
+            "color: #555; font-size: .75rem;"
+        );
+        console.group("%c🚀 View developer messages", "color: white; background: purple; padding: 3px 6px; border-radius: 4px;");
+
+        console.log("%cDebug Mode: %cOn", "color: #555", "color: lightgreen;");
+        console.log("%cCache: %cOff", "color: #555", "color: red;");
+
+        console.log("%c⚠️ API response time is slow", "color: yellow;");
+
+        console.groupCollapsed("%cDetails", "color: cyan;");
+        console.log("%cEnvironment: %cProduction", "color: #888;", "color: white;");
+        console.log("%cVersion: %c1.3.2", "color: #888;", "color: white;");
+        console.groupEnd();
+
+        console.groupEnd();
+
+
+    </script>
+</body>
+
+</html>

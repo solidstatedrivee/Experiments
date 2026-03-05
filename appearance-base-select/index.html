@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Style Selects</title>
+    <style>
+        :root {
+            --hunter-green: #436436;
+            --lime-cream: #D6F599;
+            --chartreuse: #D2FF28;
+            --spicy-orange: #C84C09;
+            --night-bordeaux: #420217;
+
+            --primary: var(--night-bordeaux);
+            --primary--dark: oklch(from var(--primary) calc(l * .75) c h);
+            --primary--darker: oklch(from var(--primary) calc(l * .5) c h);
+            --primary--light: oklch(from var(--primary) calc(l * 1.25) c h);
+            --primary--lighter: oklch(from var(--primary) calc(l * 1.5) c h);
+
+            --secondary: var(--spicy-orange);
+            --secondary--dark: oklch(from var(--secondary) calc(l * .75) c h);
+            --secondary--darker: oklch(from var(--secondary) calc(l * .5) c h);
+            --secondary--light: oklch(from var(--secondary) calc(l * 1.25) c h);
+            --secondary--lighter: oklch(from var(--secondary) calc(l * 1.5) c h);
+
+            --tertiary: var(--chartreuse);
+            --tertiary--10: rgb(from var(--tertiary) r g b / .1);
+            --tertiary--dark: oklch(from var(--tertiary) calc(l * .75) c h);
+            --tertiary--darker: oklch(from var(--tertiary) calc(l * .5) c h);
+            --tertiary--light: oklch(from var(--tertiary) calc(l * 1.25) c h);
+            --tertiary--lighter: oklch(from var(--tertiary) calc(l * 1.5) c h);
+
+            color-scheme: light dark;
+        }
+
+        body {
+            display: grid;
+            place-content: center;
+            min-block-size: 100vh;
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background: repeating-linear-gradient(
+                    45deg,
+                    var(--primary),
+                    var(--primary) 8px,
+                    var(--tertiary--10) 8px,
+                    var(--tertiary--10) 16px);
+        }
+
+        h1,
+        p {
+            text-align: center;
+            margin: 0;
+        }
+
+        label[for] {
+            display: block;
+            margin-block-end: .5rem;
+            font-weight: 500;
+            font-size: 1.25rem;
+        }
+
+        .select-wrapper {
+            border: 1px solid var(--primary--lighter);
+            inline-size: 35rem;
+            min-block-size: 17rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background: var(--primary--light);
+            margin-block-start: 2rem;
+        }
+
+        select.enable-base-select {
+            inline-size: 100%;
+            background: var(--primary--dark);
+            border: 1px solid var(--primary--lighter);
+            border: none;
+            transition: border-radius 250ms ease;
+            padding: .5rem;
+
+            &,
+            &::picker(select) {
+                appearance: base-select;
+            }
+
+            option {
+                padding-block: .25rem;
+                transition: background 250ms ease, padding 250ms ease;
+                cursor: pointer;
+
+                &:hover {
+                    background: var(--secondary);
+                    padding-inline-start: .75rem;
+                }
+
+                &:checked {
+                    padding-inline-start: 2.25rem;
+                    background: var(--tertiary);
+                    color: var(--primary);
+                    font-size: 1.25em;
+                    font-weight: 500;
+
+                    .price {
+                        color: var(--tertiary--darker);
+                    }
+                }
+
+                &::checkmark {
+                    content: "💯";
+                }
+
+                .desc {
+                    font-size: .8em;
+                    margin-inline: 1rem;
+                    font-weight: 100;
+                }
+
+                .price {
+                    font-size: .8em;
+                    color: var(--tertiary);
+                }
+            }
+
+            &::picker(select) {
+                background: var(--primary--lighter);
+                border: none;
+                border-bottom-right-radius: .25rem;
+                border-bottom-left-radius: .25rem;
+                opacity: 0;
+                transition: all 250ms allow-discrete;
+            }
+
+            &::picker(select):popover-open {
+                opacity: 1;
+            }
+
+            @starting-style {
+                &::picker(select):popover-open {
+                    opacity: 0;
+                }
+            }
+
+            &::picker-icon {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                rotate: 0deg;
+                transition: rotate 250ms ease;
+                color: var(--tertiary--lighter);
+            }
+
+            &:open {
+                border-radius: 0;
+
+                &::picker-icon {
+                    rotate: 90deg;
+                }
+            }
+
+            selectedcontent {
+                color: var(--tertiary--lighter);
+
+                .desc,
+                .price {
+                    display: none;
+                }
+            }
+        }
+
+        label[for="enable-base-select"] {
+            font-size: 1rem;
+            cursor: pointer;
+            margin-block-end: 1rem;
+            input {
+                accent-color: var(--tertiary);
+            }
+            code {
+                background: var(--primary);
+                padding: .25rem .5rem;
+                border-radius: .25rem;
+                color: var(--secondary--light);
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=> {
+            const enableBaseSelect = document.getElementById('enable-base-select');
+            const tacosSelect = document.getElementById('tacos');
+            enableBaseSelect.addEventListener('change', function() {
+                tacos.classList.toggle('enable-base-select');
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>🌮 Too Real Tacos Co.</h1>
+    <p>Always delicious, never boring!</p>
+    <div class="select-wrapper">
+        <label for="enable-base-select">
+            <input type="checkbox" name="enable-base-select" id="enable-base-select">
+            Enable <code>base-select</code>
+        </label>
+        <label for="tacos">Choose your taco:</label>
+        <select id="tacos" name="tacos">
+            <button>
+                <selectedcontent></selectedcontent>
+            </button>
+            <option value="" selected>None</option>
+            <option value="steak">
+                <span class="label">Steak</span>
+                <span class="desc">Onions, Cilantro</span>
+                <span class="price">$1.50</span>
+            </option>
+            <option value="chicken">
+                <span class="label">Chicken</span>
+                <span class="desc">Pico de Gallo</span>
+                <span class="price">$1.25</span>
+            </option>
+            <option value="fish">
+                <span class="label">Fish</span>
+                <span class="desc">Fried cod, Slaw</span>
+                <span class="price">$1.75</span>
+            </option>
+            <option value="veggie">
+                <span class="label">Veggie</span>
+                <span class="desc">Cactus, Guacamole, Queso fresco</span>
+                <span class="price">$1.00</span>
+            </option>
+        </select>
+    </div>
+</body>
+
+</html>

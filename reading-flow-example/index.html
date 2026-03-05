@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Flow - Example</title>
+    <style>
+        body {
+            display: grid;
+            place-content: center;
+            font-family: system-ui;
+            min-block-size: 100svh;
+            margin: 0;
+            background: rgb(29, 29, 29);
+            color: rgb(218, 218, 218);
+            background-image: repeating-linear-gradient(
+                -45deg,
+                rgb(29, 29, 29),
+                rgb(29, 29, 29) 10px,
+                rgba(218, 218, 218, 0.067) 10px, 
+                rgba(218, 218, 218, 0.067) 15px
+            );
+        }
+
+        .card-wrapper {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 1rem;
+            grid-auto-flow: dense;
+            /* reading-flow: grid-columns; */
+            max-inline-size: 80rem;
+        }
+
+        .card {
+            border: 1px solid rgb(79, 79, 79);
+            padding: 1rem;
+            border-radius: .5rem;
+            background: rgba(29, 29, 29, 0.8);
+        }
+
+        .card:nth-child(even) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .card.featured {
+            border: 2px dashed rgb(29, 29, 29);
+            order: -1;
+            background: rgb(211, 198, 12);
+            color: rgb(29, 29, 29);
+            grid-column: span 2;
+
+            a {
+                color: rgb(29, 29, 29);
+            }
+        }
+
+        a {
+            color: rgb(218, 218, 218);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card-wrapper">
+        <div class="card">
+            <h2>Advanced data analytics and machine</h2>
+            <p>Search engine optimization (SEO) is essential for improving a website's visibility on search engines like
+                Google.</p>
+            <a href="#">Video marketing has</a>
+        </div>
+        <div class="card">
+            <h2>Social media engagement strategies</h2>
+            <p>Building authentic relationships with your audience boosts brand loyalty and customer retention.</p>
+            <a href="#">Explore community tactics</a>
+        </div>
+
+        <div class="card">
+            <h2>Email marketing automation</h2>
+            <p>Automated campaigns can nurture leads, increase conversions, and save time across your funnel.</p>
+            <a href="#">Start automating now</a>
+        </div>
+
+        <div class="card">
+            <h2>Content creation and storytelling</h2>
+            <p>Compelling content is the backbone of digital marketing and builds trust with your audience.</p>
+            <a href="#">Learn how to craft stories</a>
+        </div>
+
+        <div class="card">
+            <h2>User experience and UI design</h2>
+            <p>A seamless user experience keeps visitors engaged and improves overall site performance.</p>
+            <a href="#">Design better interfaces</a>
+        </div>
+
+        <div class="card">
+            <h2>Data-driven campaign insights</h2>
+            <p>Understanding user behavior through analytics helps fine-tune your digital marketing strategy.</p>
+            <a href="#">View reporting tools</a>
+        </div>
+
+        <div class="card">
+            <h2>Mobile-first web development</h2>
+            <p>With mobile usage rising, responsive design ensures accessibility on all devices.</p>
+            <a href="#">Build mobile-first sites</a>
+        </div>
+
+        <div class="card">
+            <h2>Pay-per-click (PPC) advertising</h2>
+            <p>PPC campaigns can yield immediate traffic when optimized for your target audience.</p>
+            <a href="#">Launch your first ad</a>
+        </div>
+
+        <div class="card">
+            <h2>Brand identity and visual design</h2>
+            <p>A consistent and memorable brand presence sets you apart from the competition.</p>
+            <a href="#">Develop your brand</a>
+        </div>
+
+    </div>
+</body>
+
+</html>

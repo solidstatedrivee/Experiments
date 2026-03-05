@@ -1,0 +1,88 @@
+:root {
+    --night: #151515;
+    --redwood: #A63D40;
+    --earth-yellow: #E9B872;
+    --asparagus: #90A959;
+    --air-force-blue: #6494AA;
+    --white: #e6e6e6;
+}
+
+body {
+    --spacing: 15px;
+    display: grid;
+    place-content: center;
+    place-items: center;
+    margin: 0;
+    min-block-size: 100svh;
+    font-family: system-ui;
+    background: var(--night);
+    color: var(--white);
+    background-image: repeating-linear-gradient(
+        -45deg,
+        var(--night),
+        var(--night) var(--spacing),
+        rgba(from var(--asparagus) r g b / .05) var(--spacing),
+        rgba(from var(--asparagus) r g b / .05) calc(var(--spacing) * 2)
+    );
+}
+
+.wrapper {
+    width: min(50ch, 100%);
+    display: grid;
+    gap: 1rem;
+}
+
+.card {
+    --clr: var(--redwood);
+    background: var(--clr);
+    padding: .5rem;
+    border-radius: .5rem;
+
+    .badge {
+        display: inline-block;
+        background: oklch(from var(--clr) calc(l *.5) c h);
+        padding: .5rem;
+        font-size: .875rem;
+        border-radius: .25rem;
+        font-weight: 500;
+    }
+}
+
+.card:nth-child(odd of :not(.hidden)) {
+    --clr: var(--earth-yellow);
+    color: var(--night);
+
+    .badge {
+        color: var(--white);
+    }
+}
+
+h2 {
+    margin-block-end: 0;
+}
+
+p {
+    font-size: .875rem;
+    margin-block-start: .5rem;
+}
+
+.hidden {
+    display: none;
+}
+
+label, select {
+    display: inline-block;
+    width: fit-content;
+}
+
+.filter-wrapper {
+    display: flex;
+    gap: 1rem;
+    justify-content: end;
+
+    select {
+        background: transparent;
+        color: var(--white);
+        border: 0;
+    }
+}
