@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Daily Wire — Article</title>
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --bg:        #111113;
+      --surface:   #1c1c1f;
+      --border:    #2e2e33;
+      --text:      #d8d8de;
+      --muted:     #7a7a85;
+      --accent:    #4a8ff0;
+      --heading:   #f0f0f4;
+      --max-w:     1100px;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.0625rem;
+      line-height: 1.75;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Header ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-family: sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--heading);
+      text-transform: uppercase;
+    }
+    nav {
+      display: flex;
+      gap: 1.75rem;
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    nav a { color: var(--muted); letter-spacing: 0.04em; }
+    nav a:hover { color: var(--heading); text-decoration: none; }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 1.5rem 3.5rem;
+      text-align: center;
+    }
+    .hero-inner { max-width: 720px; margin: 0 auto; }
+    .category {
+      display: inline-block;
+      font-family: sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      line-height: 1.25;
+      color: var(--heading);
+      margin-bottom: 1rem;
+    }
+    .hero .deck {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.55;
+    }
+    .meta {
+      font-family: sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .meta strong { color: var(--text); }
+
+    /* ── Layout ── */
+    .layout {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    /* ── Article body ── */
+    article h2 {
+      font-size: 1.35rem;
+      color: var(--heading);
+      margin: 2.25rem 0 0.75rem;
+      line-height: 1.3;
+    }
+    article p { margin-bottom: 1.25rem; }
+    article p:last-child { margin-bottom: 0; }
+    .drop-cap::first-letter {
+      float: left;
+      font-size: 3.8rem;
+      line-height: 0.8;
+      margin: 0.1em 0.1em 0 0;
+      color: var(--heading);
+    }
+
+    /* ── Sidebar ── */
+    aside {
+      position: sticky;
+      top: 72px;
+    }
+    .sidebar-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+    }
+    .sidebar-block h3 {
+      font-family: sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .similar-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .similar-list li { border-bottom: 1px solid var(--border); padding-bottom: 0.9rem; }
+    .similar-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .similar-list a {
+      font-size: 0.92rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .similar-list a:hover { color: var(--accent); text-decoration: none; }
+    .similar-tag {
+      display: block;
+      font-family: sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      font-family: sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--text); }
+
+    /* ── Responsive ── */
+    @media (max-width: 720px) {
+      .layout { grid-template-columns: 1fr; gap: 2rem; }
+      aside { position: static; }
+      nav { gap: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <div class="header-inner">
+    <span class="logo">The Daily Wire</span>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">World</a>
+      <a href="#">Tech</a>
+      <a href="#">Science</a>
+      <a href="#">Opinion</a>
+      <a href="#">Subscribe</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="category">Technology</span>
+    <h1>How Artificial Intelligence Is Quietly Reshaping the Global Economy</h1>
+    <p class="deck">From factory floors to financial markets, the automation wave is arriving faster than most economists predicted — and the consequences are only beginning to unfold.</p>
+    <p class="meta">
+      By <strong>Sarah Ellison</strong> &nbsp;·&nbsp; March 5, 2026 &nbsp;·&nbsp; 12 min read
+    </p>
+  </div>
+</section>
+
+<!-- ── Body ── -->
+<div class="layout">
+  <article>
+    <p class="drop-cap">For decades, economists warned that automation would eventually displace millions of workers. The timeline, they said, was uncertain — perhaps a generation away, perhaps two. That uncertainty has now collapsed. In laboratories and distribution centres, on trading desks and in legal back-offices, the shift is already underway, and it is moving with a speed that has caught even its architects off guard.</p>
+
+    <p>The clearest signal came last autumn, when a coalition of major logistics firms reported a 34 percent reduction in warehouse headcount over a single fiscal year. The culprit was not a recession or a restructuring. It was a new class of autonomous picking systems, trained on years of order data, capable of working around the clock without breaks or errors. Productivity, the companies noted in their earnings calls, had never been higher.</p>
+
+    <p>But productivity for whom? That is the question that is beginning to animate policy debates in capitals from Brussels to Washington to Beijing. The gains from artificial intelligence are real and, in aggregate, enormous. The problem — as economists who study labour displacement are quick to note — is that they are not evenly distributed.</p>
+
+    <h2>The Productivity Paradox</h2>
+
+    <p>For most of economic history, gains in productivity have eventually translated into higher wages and better living standards across society. The invention of the power loom destroyed one kind of work and created another. The internal combustion engine rendered millions of agricultural jobs obsolete while opening entirely new industries. The computer revolution of the 1980s and 90s eliminated secretarial pools and replaced them with knowledge-economy roles that, on balance, paid more.</p>
+
+    <p>There is a reasonable case that the AI transition will follow the same arc. New industries will emerge. New kinds of work — some of which we cannot yet name — will absorb the displaced. The short-term pain, on this view, is the price of long-term prosperity.</p>
+
+    <p>The counterargument, increasingly voiced by researchers at institutions like the MIT Work of the Future task force and the Brookings Institution, is that this time may genuinely be different. Previous waves of automation tended to eliminate routine physical tasks while leaving cognitive work relatively untouched. The current wave is doing the opposite — or rather, it is doing both simultaneously. AI systems can now write code, draft contracts, interpret medical images, answer customer queries, and compose financial analyses. The cognitive middle — the vast category of skilled but replicable work — is now squarely in the crosshairs.</p>
+
+    <h2>Who Is Feeling It First</h2>
+
+    <p>The effects are not landing evenly across the workforce. Data compiled by the Labour Policy Institute shows that job postings for roles in content moderation, entry-level legal research, basic graphic design, and junior data analysis fell by between 18 and 41 percent in the twenty-four months following the widespread release of capable large language models. Meanwhile, postings for AI trainers, prompt engineers, and machine learning infrastructure specialists rose sharply — but in far smaller absolute numbers.</p>
+
+    <p>Geography matters too. Cities with diversified knowledge economies — New York, London, Singapore — have absorbed the shock more readily than smaller centres built around a narrower set of industries. A mid-sized city that depends heavily on financial back-office work, for instance, is in a structurally different position than one that hosts a major research university and a diverse startup ecosystem.</p>
+
+    <p>Age compounds the problem. Workers in their fifties who spent careers building expertise in a specific domain find themselves in a particularly difficult position. Retraining programs exist, but they are inconsistent in quality and chronically underfunded. The social safety net, designed for a world of cyclical unemployment rather than structural displacement, is straining under conditions it was not built to handle.</p>
+
+    <h2>The Corporate Calculus</h2>
+
+    <p>From the perspective of company finance departments, the logic of adoption is almost irresistible. An AI system that can perform the work of a team of junior analysts at a fraction of the cost, with near-zero marginal cost per additional query, represents a step-change in unit economics. The payback period on implementation, which once measured in years, is now frequently measured in months.</p>
+
+    <p>This pressure is not limited to large corporations. Small and medium-sized businesses — long assumed to be insulated from automation by their size and flexibility — are discovering that AI tools designed for enterprise use are increasingly accessible at consumer price points. A small law firm, a regional accounting practice, a marketing agency: all are finding that tasks they once billed by the hour can now be completed in minutes.</p>
+
+    <p>The implications for professional services in particular are profound. These industries were among the last that economists expected to be disrupted, in part because they depend on trust, judgment, and the kind of contextual expertise that was thought to be beyond the reach of algorithmic systems. That assumption is now being tested in real time.</p>
+
+    <h2>Policy Responses: Tentative and Contested</h2>
+
+    <p>Governments have been slow to respond, in part because the pace of change has outrun the standard legislative cycle, and in part because the politics are genuinely complicated. Restricting AI adoption risks ceding competitive ground to rivals who will not impose similar restrictions. Doing nothing risks social fracture on a scale that democracies have historically struggled to absorb.</p>
+
+    <p>The European Union has moved furthest toward regulation, with its AI Act establishing a risk-tiered framework that imposes strict transparency and audit requirements on high-impact systems. Critics argue the rules are simultaneously too prescriptive in some areas and too vague in others. Supporters counter that imperfect rules are better than none, and that the regulatory framework will improve as understanding deepens.</p>
+
+    <p>In the United States, the approach has been characteristically fragmented. Executive orders have sketched a framework, but Congress has yet to pass comprehensive legislation. Individual states are experimenting with their own rules, producing a patchwork that large companies can navigate with relative ease but that creates genuine compliance burdens for smaller operators.</p>
+
+    <p>China, for its part, has moved to ensure that its domestic AI champions develop within a framework that aligns with state priorities — a model that prioritises control and strategic deployment over the open research culture that has characterised much of Silicon Valley's advance.</p>
+
+    <h2>Looking Ahead</h2>
+
+    <p>The honest answer to the question of where this leads is that nobody knows. The technology is evolving too rapidly, the economic feedback loops are too complex, and the second- and third-order social effects are too unpredictable for confident forecasting. What can be said with reasonable confidence is that the decisions made in the next five years — by governments, companies, educational institutions, and individuals — will shape the distribution of the technology's benefits and costs for decades to come.</p>
+
+    <p>What is certain is that the transition is no longer hypothetical. The AI economy is not arriving. It is here. The only question is what kind of economy it will be — and for whom.</p>
+  </article>
+
+  <!-- ── Sidebar ── -->
+  <aside>
+    <div class="sidebar-block">
+      <h3>Similar Articles</h3>
+      <ul class="similar-list">
+        <li>
+          <span class="similar-tag">Science</span>
+          <a href="#">Researchers Develop AI Model That Predicts Protein Folding with 99% Accuracy</a>
+        </li>
+        <li>
+          <span class="similar-tag">Economy</span>
+          <a href="#">Central Banks Warn of 'Structural Unemployment' as Automation Spreads</a>
+        </li>
+        <li>
+          <span class="similar-tag">Technology</span>
+          <a href="#">The Rise of Agentic AI: When Algorithms Start Making Decisions Alone</a>
+        </li>
+        <li>
+          <span class="similar-tag">Opinion</span>
+          <a href="#">Why the 4-Day Work Week May Be Our Best Answer to Automation</a>
+        </li>
+        <li>
+          <span class="similar-tag">World</span>
+          <a href="#">Europe's AI Regulation Experiment: One Year On</a>
+        </li>
+        <li>
+          <span class="similar-tag">Technology</span>
+          <a href="#">Inside the Warehouse That Replaced 200 Workers with Robots</a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- ── Footer ── -->
+<footer>
+  <p>&copy; 2026 The Daily Wire &nbsp;·&nbsp; <a href="#">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a> &nbsp;·&nbsp; <a href="#">Contact</a></p>
+</footer>
+
+</body>
+</html>
