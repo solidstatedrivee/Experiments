@@ -12,6 +12,9 @@ Fully customizable `<select>` elements using `appearance: base-select`. Demonstr
 ### `attr-selector-ext-links`
 Using CSS attribute selectors to differentiate internal vs. external links — styling `[target="_blank"]` links with an icon to indicate they open in a new tab.
 
+### `container-type-scroll-state`
+A CSS-only Back to Top button driven by a scroll-state container query. Uses `container-type: scroll-state` on the `<html>` element and `@container scroll-state(scrollable: top)` to slide the button in and out as the user scrolls — no JavaScript required.
+
 ### `has-not-vs-not-has`
 A side-by-side comparison of `:has(:not(img))` and `:not(:has(img))` to illustrate how selector order changes meaning and which elements get matched.
 
