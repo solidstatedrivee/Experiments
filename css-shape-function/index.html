@@ -2,480 +2,480 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSS shape() Demo</title>
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS shape() Demo</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      font-family: system-ui, sans-serif;
-      background: #0f0f13;
-      color: #e2e8f0;
-    }
+        body {
+            font-family: system-ui, sans-serif;
+            background: #0f0f13;
+            color: #e2e8f0;
+        }
 
-    /* ===================================
+        /* ===================================
        Page Header
        =================================== */
 
-    .page-header {
-      padding: 5rem 2rem 3.5rem;
-      text-align: center;
-      max-width: 680px;
-      margin: 0 auto;
-    }
+        .page-header {
+            padding: 5rem 2rem 3.5rem;
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto;
+        }
 
-    .page-header h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-    }
+        .page-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
 
-    .page-header h1 code {
-      color: #a78bfa;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-    }
+        .page-header h1 code {
+            color: #a78bfa;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
 
-    .page-header p {
-      font-size: 1.05rem;
-      color: #64748b;
-      line-height: 1.7;
-    }
+        .page-header p {
+            font-size: 1.05rem;
+            color: #64748b;
+            line-height: 1.7;
+        }
 
-    /* ===================================
+        /* ===================================
        Demo Sections
        =================================== */
 
-    .demo-section {
-      padding: 4rem 2rem;
-      border-top: 1px solid #1e1e2e;
-    }
+        .demo-section {
+            padding: 4rem 2rem;
+            border-top: 1px solid #1e1e2e;
+        }
 
-    .demo-section:last-child {
-      border-bottom: 1px solid #1e1e2e;
-      margin-bottom: 4rem;
-    }
+        .demo-section:last-child {
+            border-bottom: 1px solid #1e1e2e;
+            margin-bottom: 4rem;
+        }
 
-    .demo-canvas {
-      max-width: 800px;
-      margin: 0 auto;
-    }
+        .demo-canvas {
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-    .section-num {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #6366f1;
-      margin-bottom: 0.4rem;
-    }
+        .section-num {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #6366f1;
+            margin-bottom: 0.4rem;
+        }
 
-    .section-title {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: #f1f5f9;
-      margin-bottom: 0.4rem;
-    }
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 0.4rem;
+        }
 
-    .section-desc {
-      font-size: 0.9rem;
-      color: #475569;
-      margin-bottom: 2.5rem;
-      line-height: 1.6;
-    }
+        .section-desc {
+            font-size: 0.9rem;
+            color: #475569;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
 
-    .section-desc code {
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      font-size: 0.85em;
-      color: #818cf8;
-      background: #1e1e3a;
-      padding: 0.1em 0.35em;
-      border-radius: 3px;
-    }
+        .section-desc code {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.85em;
+            color: #818cf8;
+            background: #1e1e3a;
+            padding: 0.1em 0.35em;
+            border-radius: 3px;
+        }
 
-    /* ===================================
+        /* ===================================
        1. Wave Section Divider
        =================================== */
 
-    .wave-demo {
-      border-radius: 12px;
-      overflow: hidden;
-      height: 220px;
-      position: relative;
-      background: #13131f;
-    }
+        .wave-demo {
+            border-radius: 12px;
+            overflow: hidden;
+            height: 220px;
+            position: relative;
+            background: #13131f;
+        }
 
-    .wave-section-top {
-      position: absolute;
-      inset: 0;
-      background: #4f46e5;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 2.5rem;
-      color: rgba(255 255 255 / 0.7);
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-    }
+        .wave-section-top {
+            position: absolute;
+            inset: 0;
+            background: #4f46e5;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 2.5rem;
+            color: rgba(255 255 255 / 0.7);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
 
-    .wave-section-top::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0 0;
-      height: 110px;
-      background: #13131f;
+        .wave-section-top::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 110px;
+            background: #13131f;
 
-      /* Fallback */
-      clip-path: polygon(0% 50%, 100% 50%, 100% 100%, 0% 100%);
-    }
+            /* Fallback */
+            clip-path: polygon(0% 50%, 100% 50%, 100% 100%, 0% 100%);
+        }
 
-    @supports (clip-path: shape(from 0 0, line to 1px 1px)) {
-      .wave-section-top::after {
-        clip-path: shape(
-          from 0% 40%,
-          curve to 100% 40% with 25% 100% / 75% -20%,
-          line to 100% 100%,
-          line to 0% 100%,
-          close
-        );
-      }
-    }
+        @supports (clip-path: shape(from 0 0, line to 1px 1px)) {
+            .wave-section-top::after {
+                clip-path: shape(from 0% 40%,
+                        curve to 100% 40% with 25% 100% / 75% -20%,
+                        line to 100% 100%,
+                        line to 0% 100%,
+                        close);
+            }
+        }
 
-    .wave-section-bottom-label {
-      position: absolute;
-      bottom: 1.75rem;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #334155;
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      white-space: nowrap;
-      z-index: 1;
-    }
+        .wave-section-bottom-label {
+            position: absolute;
+            bottom: 1.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #334155;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+            z-index: 1;
+        }
 
-    /* ===================================
+        /* ===================================
        2. Blob Image Mask
        =================================== */
 
-    .blob-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: center;
-      justify-content: center;
-    }
+        .blob-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .blob {
-      width: 220px;
-      height: 220px;
+        .blob {
+            width: 220px;
+            height: 220px;
 
-      /* Fallback */
-      border-radius: 50%;
-    }
+            /* Fallback */
+            border-radius: 50%;
+        }
 
-    @supports (clip-path: shape(from 0 0, line to 1px 1px)) {
-      .blob {
-        border-radius: 0;
-        clip-path: shape(
-          from 40% 0%,
-          curve to 100% 40% with 70% -10% / 110% 20%,
-          curve to 60% 100% with 110% 80% / 80% 110%,
-          curve to 0% 60% with 30% 110% / -10% 80%,
-          curve to 40% 0% with -10% 20% / 30% -10%,
-          close
-        );
-      }
-    }
+        @supports (clip-path: shape(from 0 0, line to 1px 1px)) {
+            .blob {
+                border-radius: 0;
+                clip-path: shape(
+                    from 73.00% 29.43%, 
+                    curve to 73.00% 72.97% with 96.00% 50.00%, 
+                    curve to 28.23% 72.97% with 50.00% 95.93%, 
+                    curve to 28.23% 29.43% with 6.46% 50.00%, 
+                    curve to 73.00% 29.43% with 50.00% 8.86%);
+            }
+        }
 
-    /* ===================================
+        /* ===================================
        3. Angled Card Design
        =================================== */
 
-    .cards-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-    }
+        .cards-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
 
-    .angled-card {
-      background: #1e1e2e;
-      padding: 2rem 1.75rem 2.5rem;
-      min-height: 170px;
+        .angled-card {
+            background: #1e1e2e;
+            padding: 2rem 1.75rem 2.5rem;
+            min-height: 170px;
 
-      /* Fallback */
-      border-radius: 8px;
-    }
+            /* Fallback */
+            border-radius: 8px;
+        }
 
-    @supports (clip-path: shape(from 0 0, line to 1px 1px)) {
-      .angled-card {
-        border-radius: 0;
-        clip-path: shape(
-          from 0% 0%,
-          line to 100% 0%,
-          line to 100% 75%,
-          line to 70% 100%,
-          line to 0% 100%,
-          close
-        );
-      }
-    }
+        @supports (clip-path: shape(from 0 0, line to 1px 1px)) {
+            .angled-card {
+                border-radius: 0;
+                clip-path: shape(from 0% 0%,
+                        line to 100% 0%,
+                        line to 100% 75%,
+                        line to 70% 100%,
+                        line to 0% 100%,
+                        close);
+            }
+        }
 
-    .angled-card h3 {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: #a78bfa;
-    }
+        .angled-card h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #a78bfa;
+        }
 
-    .angled-card p {
-      font-size: 0.85rem;
-      color: #475569;
-      line-height: 1.6;
-    }
+        .angled-card p {
+            font-size: 0.85rem;
+            color: #475569;
+            line-height: 1.6;
+        }
 
-    /* ===================================
+        /* ===================================
        4. Ribbon Banner
        =================================== */
 
-    .ribbon-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.25rem;
-      align-items: center;
-    }
+        .ribbon-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            align-items: center;
+        }
 
-    .ribbon {
-      color: white;
-      padding: 0.65rem 2.75rem;
-      display: inline-block;
-      font-weight: 600;
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+        .ribbon {
+            color: white;
+            padding: 0.65rem 2.75rem;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
 
-      /* Fallback */
-      border-radius: 4px;
-    }
+            /* Fallback */
+            border-radius: 4px;
+        }
 
-    @supports (clip-path: shape(from 0 0, line to 1px 1px)) {
-      .ribbon {
-        border-radius: 0;
-        clip-path: shape(
-          from 0% 0%,
-          line to 85% 0%,
-          line to 100% 50%,
-          line to 85% 100%,
-          line to 0% 100%,
-          line to 10% 50%,
-          close
-        );
-      }
-    }
+        @supports (clip-path: shape(from 0 0, line to 1px 1px)) {
+            .ribbon {
+                border-radius: 0;
+                clip-path: shape(from 0% 0%,
+                        line to 85% 0%,
+                        line to 100% 50%,
+                        line to 85% 100%,
+                        line to 0% 100%,
+                        line to 10% 50%,
+                        close);
+            }
+        }
 
-    /* ===================================
+        /* ===================================
        5. Curved Hero Background
        =================================== */
 
-    .curved-hero {
-      min-height: 280px;
-      background: linear-gradient(135deg, #6366f1, #9333ea);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 3rem 2rem 5rem;
+        .curved-hero {
+            min-height: 280px;
+            background: linear-gradient(135deg, #6366f1, #9333ea);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 3rem 2rem 5rem;
 
-      /* Fallback */
-      border-radius: 12px;
-    }
+            /* Fallback */
+            border-radius: 12px;
+        }
 
-    @supports (clip-path: shape(from 0 0, line to 1px 1px)) {
-      .curved-hero {
-        border-radius: 0;
-        clip-path: shape(
-          from 0% 0%,
-          line to 100% 0%,
-          line to 100% 70%,
-          curve to 0% 90% with 70% 100% / 30% 60%,
-          close
-        );
-      }
-    }
+        @supports (clip-path: shape(from 0 0, line to 1px 1px)) {
+            .curved-hero {
+                border-radius: 0;
+                clip-path: shape(from 0% 0%,
+                        line to 100% 0%,
+                        line to 100% 70%,
+                        curve to 0% 90% with 70% 100% / 30% 60%,
+                        close);
+            }
+        }
 
-    .curved-hero h2 {
-      font-size: clamp(1.6rem, 4vw, 2.25rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.6rem;
-    }
+        .curved-hero h2 {
+            font-size: clamp(1.6rem, 4vw, 2.25rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.6rem;
+        }
 
-    .curved-hero p {
-      font-size: 1rem;
-      opacity: 0.75;
-    }
+        .curved-hero p {
+            font-size: 1rem;
+            opacity: 0.75;
+        }
 
-    /* ===================================
+        /* ===================================
        6. Animated Motion Path
        =================================== */
 
-    .motion-demo {
-      position: relative;
-      height: 160px;
-      background: #13131f;
-      border-radius: 12px;
-      overflow: hidden;
-    }
+        .motion-demo {
+            position: relative;
+            height: 160px;
+            background: #13131f;
+            border-radius: 12px;
+            overflow: hidden;
+        }
 
-    .motion-path-line {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.12;
-    }
+        .motion-path-line {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.12;
+        }
 
-    .dot {
-      width: 14px;
-      height: 14px;
-      background: #a78bfa;
-      border-radius: 50%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 0 16px oklch(65% 0.25 293), 0 0 32px oklch(65% 0.25 293 / 0.4);
-    }
+        .dot {
+            width: 14px;
+            height: 14px;
+            background: #a78bfa;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 16px oklch(65% 0.25 293), 0 0 32px oklch(65% 0.25 293 / 0.4);
+        }
 
-    @supports (offset-path: shape(from 0% 50%, curve to 100% 50% with 25% 0% / 75% 100%)) {
-      .dot {
-        top: 0;
-        left: 0;
-        transform: none;
-        offset-path: shape(
-          from 5% 50%,
-          curve to 95% 50% with 30% 0% / 70% 100%
-        );
-        offset-distance: 0%;
-        offset-anchor: center;
-        animation: travel 3s ease-in-out infinite alternate;
-      }
-    }
+        @supports (offset-path: shape(from 0% 50%, curve to 100% 50% with 25% 0% / 75% 100%)) {
+            .dot {
+                top: 0;
+                left: 0;
+                transform: none;
+                offset-path: shape(from 5% 50%,
+                        curve to 95% 50% with 30% 0% / 70% 100%);
+                offset-distance: 0%;
+                offset-anchor: center;
+                animation: travel 3s ease-in-out infinite alternate;
+            }
+        }
 
-    @keyframes travel {
-      to {
-        offset-distance: 100%;
-      }
-    }
-  </style>
+        @keyframes travel {
+            to {
+                offset-distance: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <header class="page-header">
-    <h1>CSS <code>shape()</code> Demo</h1>
-    <p>Six UI patterns — wave dividers, blob masks, angled cards, ribbon banners, curved heroes, and motion paths — defined entirely in CSS. No SVG required.</p>
-  </header>
+    <header class="page-header">
+        <h1>CSS <code>shape()</code> Demo</h1>
+        <p>Six UI patterns — wave dividers, blob masks, angled cards, ribbon banners, curved heroes, and motion paths —
+            defined entirely in CSS. No SVG required.</p>
+    </header>
 
-  <!-- 1. Wave Section Divider -->
-  <section class="demo-section">
-    <div class="demo-canvas">
-      <p class="section-num">Pattern 01</p>
-      <h2 class="section-title">Curved Section Divider</h2>
-      <p class="section-desc">A wave transition between two sections, created with <code>clip-path: shape()</code> on a <code>::after</code> pseudo-element positioned at the bottom of the top section.</p>
-      <div class="wave-demo">
-        <div class="wave-section-top">Section A</div>
-        <span class="wave-section-bottom-label">Section B</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2. Blob Image Mask -->
-  <section class="demo-section">
-    <div class="demo-canvas">
-      <p class="section-num">Pattern 02</p>
-      <h2 class="section-title">Blob Image Mask</h2>
-      <p class="section-desc">Organic blob shapes built from four cubic bezier curves. Apply <code>clip-path: shape()</code> to any element — including images — without an SVG mask.</p>
-      <div class="blob-row">
-        <div class="blob" style="background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);"></div>
-        <div class="blob" style="background: linear-gradient(135deg, #0ea5e9, #6366f1);"></div>
-        <div class="blob" style="background: linear-gradient(135deg, #f59e0b, #ef4444, #ec4899);"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. Angled Card Design -->
-  <section class="demo-section">
-    <div class="demo-canvas">
-      <p class="section-num">Pattern 03</p>
-      <h2 class="section-title">Angled Card Design</h2>
-      <p class="section-desc">Cards with a diagonal corner cut using five <code>line to</code> commands. Common in SaaS pricing and product feature sections.</p>
-      <div class="cards-row">
-        <div class="angled-card">
-          <h3>Starter</h3>
-          <p>For individuals and small projects getting started.</p>
+    <!-- 1. Wave Section Divider -->
+    <section class="demo-section">
+        <div class="demo-canvas">
+            <p class="section-num">Pattern 01</p>
+            <h2 class="section-title">Curved Section Divider</h2>
+            <p class="section-desc">A wave transition between two sections, created with <code>clip-path: shape()</code>
+                on a <code>::after</code> pseudo-element positioned at the bottom of the top section.</p>
+            <div class="wave-demo">
+                <div class="wave-section-top">Section A</div>
+                <span class="wave-section-bottom-label">Section B</span>
+            </div>
         </div>
-        <div class="angled-card">
-          <h3>Pro</h3>
-          <p>For teams that need more power and collaboration.</p>
+    </section>
+
+    <!-- 2. Blob Image Mask -->
+    <section class="demo-section">
+        <div class="demo-canvas">
+            <p class="section-num">Pattern 02</p>
+            <h2 class="section-title">Blob Image Mask</h2>
+            <p class="section-desc">Organic blob shapes built from four cubic bezier curves. Apply
+                <code>clip-path: shape()</code> to any element — including images — without an SVG mask.
+            </p>
+            <div class="blob-row">
+                <div class="blob" style="background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);"></div>
+                <div class="blob" style="background: linear-gradient(135deg, #0ea5e9, #6366f1);"></div>
+                <div class="blob" style="background: linear-gradient(135deg, #f59e0b, #ef4444, #ec4899);"></div>
+            </div>
         </div>
-        <div class="angled-card">
-          <h3>Enterprise</h3>
-          <p>Custom solutions with dedicated support and SLA.</p>
+    </section>
+
+    <!-- 3. Angled Card Design -->
+    <section class="demo-section">
+        <div class="demo-canvas">
+            <p class="section-num">Pattern 03</p>
+            <h2 class="section-title">Angled Card Design</h2>
+            <p class="section-desc">Cards with a diagonal corner cut using five <code>line to</code> commands. Common in
+                SaaS pricing and product feature sections.</p>
+            <div class="cards-row">
+                <div class="angled-card">
+                    <h3>Starter</h3>
+                    <p>For individuals and small projects getting started.</p>
+                </div>
+                <div class="angled-card">
+                    <h3>Pro</h3>
+                    <p>For teams that need more power and collaboration.</p>
+                </div>
+                <div class="angled-card">
+                    <h3>Enterprise</h3>
+                    <p>Custom solutions with dedicated support and SLA.</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 4. Ribbon Banner -->
-  <section class="demo-section">
-    <div class="demo-canvas">
-      <p class="section-num">Pattern 04</p>
-      <h2 class="section-title">Ribbon Banner</h2>
-      <p class="section-desc">Double-pointed arrow ribbons built from six <code>line to</code> commands. No images or border tricks — the shape lives entirely in <code>clip-path</code>.</p>
-      <div class="ribbon-row">
-        <span class="ribbon" style="background: #dc2626;">Sale Today</span>
-        <span class="ribbon" style="background: #7c3aed;">New Feature</span>
-        <span class="ribbon" style="background: #0369a1;">In Stock</span>
-        <span class="ribbon" style="background: #059669;">Verified</span>
-      </div>
-    </div>
-  </section>
+    <!-- 4. Ribbon Banner -->
+    <section class="demo-section">
+        <div class="demo-canvas">
+            <p class="section-num">Pattern 04</p>
+            <h2 class="section-title">Ribbon Banner</h2>
+            <p class="section-desc">Double-pointed arrow ribbons built from six <code>line to</code> commands. No images
+                or border tricks — the shape lives entirely in <code>clip-path</code>.</p>
+            <div class="ribbon-row">
+                <span class="ribbon" style="background: #dc2626;">Sale Today</span>
+                <span class="ribbon" style="background: #7c3aed;">New Feature</span>
+                <span class="ribbon" style="background: #0369a1;">In Stock</span>
+                <span class="ribbon" style="background: #059669;">Verified</span>
+            </div>
+        </div>
+    </section>
 
-  <!-- 5. Curved Hero Background -->
-  <section class="demo-section">
-    <div class="demo-canvas">
-      <p class="section-num">Pattern 05</p>
-      <h2 class="section-title">Curved Hero Background</h2>
-      <p class="section-desc">A gradient hero section with a smooth curved bottom edge. A single <code>curve to</code> command replaces what used to require an inline SVG or absolute-positioned image.</p>
-      <div class="curved-hero">
-        <h2>Build something beautiful</h2>
-        <p>CSS-native shapes. No SVG. No Illustrator exports.</p>
-      </div>
-    </div>
-  </section>
+    <!-- 5. Curved Hero Background -->
+    <section class="demo-section">
+        <div class="demo-canvas">
+            <p class="section-num">Pattern 05</p>
+            <h2 class="section-title">Curved Hero Background</h2>
+            <p class="section-desc">A gradient hero section with a smooth curved bottom edge. A single
+                <code>curve to</code> command replaces what used to require an inline SVG or absolute-positioned image.
+            </p>
+            <div class="curved-hero">
+                <h2>Build something beautiful</h2>
+                <p>CSS-native shapes. No SVG. No Illustrator exports.</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- 6. Animated Motion Path -->
-  <section class="demo-section">
-    <div class="demo-canvas">
-      <p class="section-num">Pattern 06</p>
-      <h2 class="section-title">Animated Motion Path</h2>
-      <p class="section-desc"><code>offset-path: shape()</code> moves an element along a curved path defined in CSS. The S-curve below uses a single <code>curve to</code> command with two cubic bezier handles.</p>
-      <div class="motion-demo">
-        <svg class="motion-path-line" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M 5 50 C 30 0, 70 100, 95 50" stroke="white" stroke-width="0.6" fill="none" stroke-dasharray="2 2"/>
-        </svg>
-        <div class="dot"></div>
-      </div>
-    </div>
-  </section>
+    <!-- 6. Animated Motion Path -->
+    <section class="demo-section">
+        <div class="demo-canvas">
+            <p class="section-num">Pattern 06</p>
+            <h2 class="section-title">Animated Motion Path</h2>
+            <p class="section-desc"><code>offset-path: shape()</code> moves an element along a curved path defined in
+                CSS. The S-curve below uses a single <code>curve to</code> command with two cubic bezier handles.</p>
+            <div class="motion-demo">
+                <svg class="motion-path-line" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M 5 50 C 30 0, 70 100, 95 50" stroke="white" stroke-width="0.6" fill="none"
+                        stroke-dasharray="2 2" />
+                </svg>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </section>
 
 </body>
 
