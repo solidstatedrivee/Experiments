@@ -166,9 +166,29 @@
         .blob-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 1rem;
             align-items: center;
             justify-content: center;
+        }
+
+        .blob-profile {
+            background: #2d287b;
+            padding: 1rem 1rem 3rem;
+            border-radius: 0.5rem;
+            flex-basis: 30%;
+            img {
+                inline-size: 100%;
+                block-size: 100%;
+                object-fit: cover;
+            }
+
+            h3 {
+                color: rgba(255 255 255 / 0.7);
+            }
+
+            p {
+                color: #fff;
+            }
         }
 
         .blob {
@@ -182,12 +202,24 @@
         @supports (clip-path: shape(from 0 0, line to 1px 1px)) {
             .blob {
                 border-radius: 0;
-                clip-path: shape(
-                    from 73.00% 29.43%, 
-                    curve to 73.00% 72.97% with 96.00% 50.00%, 
-                    curve to 28.23% 72.97% with 50.00% 95.93%, 
-                    curve to 28.23% 29.43% with 6.46% 50.00%, 
-                    curve to 73.00% 29.43% with 50.00% 8.86%);
+                /* clip-path: shape(from 73.00% 29.43%,
+                        curve to 73.00% 72.97% with 96.00% 50.00%,
+                        curve to 28.23% 72.97% with 50.00% 95.93%,
+                        curve to 28.23% 29.43% with 6.46% 50.00%,
+                        curve to 73.00% 29.43% with 50.00% 8.86%); */
+                clip-path: shape(from 80.37% 80.63%,
+                        curve to 59.63% 90.15% with 70.17% 86.69%,
+                        curve to 37.90% 91.03% with 49.09% 93.62%,
+                        curve to 21.06% 78.73% with 26.72% 88.43%,
+                        curve to 12.04% 59.08% with 15.40% 69.02%,
+                        curve to 12.59% 39.42% with 8.69% 49.13%,
+                        curve to 22.32% 19.97% with 16.50% 29.71%,
+                        curve to 39.50% 9.56% with 28.14% 10.23%,
+                        curve to 63.01% 8.67% with 50.86% 8.89%,
+                        curve to 84.28% 17.29% with 75.17% 8.44%,
+                        curve to 91.49% 38.49% with 93.39% 26.15%,
+                        curve to 90.08% 62.70% with 89.59% 50.83%,
+                        curve to 80.37% 80.63% with 90.57% 74.57%);
             }
         }
 
@@ -398,9 +430,33 @@
                 <code>clip-path: shape()</code> to any element — including images — without an SVG mask.
             </p>
             <div class="blob-row">
-                <div class="blob" style="background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);"></div>
-                <div class="blob" style="background: linear-gradient(135deg, #0ea5e9, #6366f1);"></div>
-                <div class="blob" style="background: linear-gradient(135deg, #f59e0b, #ef4444, #ec4899);"></div>
+                <div class="blob-profile">
+                    <div class="blob">
+                        <img src="https://images.pexels.com/photos/262391/pexels-photo-262391.jpeg?_gl=1*6186l8*_ga*MTQxMjI2NjU3MC4xNzczMDc2MTQ5*_ga_8JE65Q40S6*czE3NzMwNzYxNDgkbzEkZzEkdDE3NzMwNzYxOTUkajEzJGwwJGgw"
+                            alt="">
+                    </div>
+                    <h3>Marcus Bennett</h3>
+                    <p>Marcus Bennett is a senior software engineer who specializes in building scalable web
+                        applications and improving performance across modern front-end architectures.</p>
+                </div>
+                <div class="blob-profile">
+                    <div class="blob">
+                        <img src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?_gl=1*3q0hpc*_ga*MTQxMjI2NjU3MC4xNzczMDc2MTQ5*_ga_8JE65Q40S6*czE3NzMwNzYxNDgkbzEkZzEkdDE3NzMwNzYyMTckajU2JGwwJGgw"
+                            alt="">
+                    </div>
+                    <h3>Maya Thompson</h3>
+                    <p>Maya Thompson is a strategic communications specialist with over a decade of experience helping
+                        organizations craft clear, impactful messaging across digital platforms.</p>
+                </div>
+                <div class="blob-profile">
+                    <div class="blob">
+                        <img src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?_gl=1*1ih7ds*_ga*MTQxMjI2NjU3MC4xNzczMDc2MTQ5*_ga_8JE65Q40S6*czE3NzMwNzYxNDgkbzEkZzEkdDE3NzMwNzYyMjgkajQ1JGwwJGgw"
+                            alt="">
+                    </div>
+                    <h3>Daniel Rivera</h3>
+                    <p>Daniel Rivera is a project manager who focuses on delivering complex initiatives on time and on
+                        budget while building strong collaboration across cross-functional teams.</p>
+                </div>
             </div>
         </div>
     </section>
