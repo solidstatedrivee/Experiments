@@ -6,6 +6,9 @@ A collection of demos showcasing modern and cutting-edge web platform features.
 
 ## Experiments
 
+### `anchor-positioning`
+Position any element relative to any other element in the DOM — without wrappers or JavaScript — using CSS `anchor-name`, `position-anchor`, `position-area`, and `position-try-fallbacks`.
+
 ### `appearance-base-select`
 Fully customizable `<select>` elements using `appearance: base-select`. Demonstrates styling the picker, options, checkmark pseudo-element (`::checkmark`), picker icon (`::picker-icon`), and `<selectedcontent>` — along with `@starting-style` for entry animations.
 

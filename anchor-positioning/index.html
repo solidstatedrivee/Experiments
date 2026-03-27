@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Anchor Positioning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #6366f1;
+            --accent-hover: #818cf8;
+            --surface: #1e1e2e;
+            --surface-raised: #2a2a3d;
+            --border: rgb(255 255 255 / .12);
+            --text: #e2e8f0;
+            --text-dim: rgb(226 232 240 / .55);
+            --error: #f87171;
+            --success: #4ade80;
+            --radius: 6px;
+        }
+
+        body {
+            margin: 0;
+            min-block-size: 200svh;
+            font-family: system-ui;
+            background: #0d0d14;
+            background-image: repeating-linear-gradient(
+                45deg,
+                #0d0d14,
+                #0d0d14 6px,
+                rgb(255 255 255 / .025) 6px,
+                rgb(255 255 255 / .025) 12px
+            );
+            color: var(--text);
+            padding-block: 4rem;
+            padding-inline: 2rem;
+        }
+
+        .page {
+            max-inline-size: 52rem;
+            margin-inline: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .page-header {
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+        }
+
+        .page-header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: var(--text-dim);
+            font-size: .9rem;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            gap: .35rem;
+        }
+
+        .section-label {
+            font-size: .7rem;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .section-note {
+            font-size: .82rem;
+            color: var(--text-dim);
+            margin: 0;
+            line-height: 1.5;
+
+            code {
+                font-family: ui-monospace, monospace;
+                font-size: .8em;
+                color: var(--accent-hover);
+                background: rgb(99 102 241 / .12);
+                padding-inline: .3em;
+                border-radius: 3px;
+            }
+        }
+
+        .demo-area {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+        }
+
+        /* ─── Shared button styles ─── */
+
+        .btn-primary {
+            padding-block: .45rem;
+            padding-inline: 1rem;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: .875rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            transition: background 150ms;
+
+            &:hover {
+                background: var(--accent-hover);
+            }
+
+            &:disabled {
+                opacity: .5;
+                cursor: not-allowed;
+            }
+        }
+
+        /* ─── Pattern 1: Tooltips ─── */
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Anchor declarations */
+        .btn-undo   { anchor-name: --btn-undo;   }
+        .btn-bold   { anchor-name: --btn-bold;   }
+        .btn-italic { anchor-name: --btn-italic; }
+        .btn-link   { anchor-name: --btn-link;   }
+        .btn-image  { anchor-name: --btn-image;  }
+
+        .tool-btn {
+            inline-size: 2.5rem;
+            block-size: 2.5rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface-raised);
+            color: var(--text);
+            cursor: pointer;
+            font-size: .95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 150ms, border-color 150ms, color 150ms;
+
+            &:hover {
+                background: var(--accent);
+                border-color: var(--accent);
+                color: #fff;
+            }
+        }
+
+        .tooltip {
+            position: fixed;
+            position-area: top;
+            margin-block-end: 8px;
+            position-try-fallbacks: flip-block;
+
+            background: var(--surface-raised);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding-block: .3rem;
+            padding-inline: .6rem;
+            font-size: .78rem;
+            white-space: nowrap;
+            pointer-events: none;
+            color: var(--text);
+
+            opacity: 0;
+            transition: opacity 150ms;
+        }
+
+        /* Individual anchor associations */
+        .tooltip-undo   { position-anchor: --btn-undo;   }
+        .tooltip-bold   { position-anchor: --btn-bold;   }
+        .tooltip-italic { position-anchor: --btn-italic; }
+        .tooltip-link   { position-anchor: --btn-link;   }
+        .tooltip-image  { position-anchor: --btn-image;  }
+
+        /* Pure CSS hover — no JS */
+        .btn-undo:hover   + .tooltip-undo   { opacity: 1; }
+        .btn-bold:hover   + .tooltip-bold   { opacity: 1; }
+        .btn-italic:hover + .tooltip-italic { opacity: 1; }
+        .btn-link:hover   + .tooltip-link   { opacity: 1; }
+        .btn-image:hover  + .tooltip-image  { opacity: 1; }
+
+        /* ─── Pattern 2: Dropdown ─── */
+
+        .view-button {
+            anchor-name: --view-btn;
+        }
+
+        #view-menu {
+            position: fixed;
+            position-anchor: --view-btn;
+            position-area: bottom span-right;
+            margin-block: 4px;
+            position-try-fallbacks: flip-block;
+
+            /* Reset popover UA styles */
+            /* margin: 0; */
+            padding: 0;
+            list-style: none;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface-raised);
+            min-inline-size: 11rem;
+            overflow: hidden;
+
+            /* Animation */
+            opacity: 0;
+            scale: 0.97;
+            transform-origin: top left;
+            transition: opacity 180ms, scale 180ms, display 180ms allow-discrete;
+
+            &:popover-open {
+                opacity: 1;
+                scale: 1;
+            }
+
+            @starting-style {
+                &:popover-open {
+                    opacity: 0;
+                    scale: 0.97;
+                }
+            }
+
+            li {
+                button {
+                    display: flex;
+                    align-items: center;
+                    gap: .5rem;
+                    inline-size: 100%;
+                    padding-block: .5rem;
+                    padding-inline: .75rem;
+                    background: none;
+                    border: none;
+                    color: var(--text);
+                    cursor: pointer;
+                    text-align: start;
+                    font-family: inherit;
+                    font-size: .875rem;
+
+                    &:hover {
+                        background: rgb(99 102 241 / .15);
+                        color: var(--accent-hover);
+                    }
+                }
+
+                &.active button {
+                    color: var(--accent-hover);
+
+                    i {
+                        opacity: 1;
+                    }
+                }
+
+                button i.fa-check {
+                    opacity: 0;
+                    font-size: .75rem;
+                    inline-size: 1rem;
+                    flex-shrink: 0;
+                }
+            }
+        }
+
+        /* ─── Pattern 3: Form Validation ─── */
+
+        #contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+        }
+
+        .field label {
+            font-size: .82rem;
+            font-weight: 500;
+            color: var(--text-dim);
+        }
+
+        .form-input {
+            inline-size: 22rem;
+            max-inline-size: 100%;
+            padding-block: .5rem;
+            padding-inline: .75rem;
+            background: var(--surface-raised);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-family: inherit;
+            font-size: .9rem;
+            transition: border-color 150ms;
+
+            &::placeholder {
+                color: rgb(226 232 240 / .3);
+            }
+
+            &:focus {
+                outline: none;
+                border-color: var(--accent);
+            }
+
+            &.is-invalid {
+                border-color: var(--error);
+            }
+
+            &.is-valid {
+                border-color: var(--success);
+            }
+        }
+
+        /* Anchor declarations on inputs */
+        .name-input  { anchor-name: --name-input;  }
+        .email-input { anchor-name: --email-input; }
+
+        /* Error messages — positioned via anchor from anywhere in the DOM */
+        .error-msg {
+            position: fixed;
+            position-area: bottom span-right;
+            margin-block-start: 4px;
+            position-try-fallbacks: flip-block;
+
+            font-size: .78rem;
+            color: var(--error);
+            background: rgb(248 113 113 / .08);
+            border: 1px solid rgb(248 113 113 / .25);
+            border-radius: var(--radius);
+            padding-block: .3rem;
+            padding-inline: .6rem;
+            pointer-events: none;
+            white-space: nowrap;
+
+            opacity: 0;
+            transition: opacity 150ms;
+
+            &.visible {
+                opacity: 1;
+            }
+        }
+
+        .error-name  { position-anchor: --name-input;  }
+        .error-email { position-anchor: --email-input; }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <header class="page-header">
+            <h1>CSS Anchor Positioning</h1>
+            <p>Three patterns — no JavaScript position sync, no <code style="font-family: ui-monospace, monospace; font-size: .85em; color: #818cf8; background: rgb(99 102 241 / .12); padding-inline: .3em; border-radius: 3px;">position: relative</code> wrappers.</p>
+        </header>
+
+        <!-- ─── Pattern 1: Tooltips ─── -->
+        <section class="section">
+            <div class="section-header">
+                <p class="section-label">Pattern 1</p>
+                <h2 class="section-title">Tooltips</h2>
+                <p class="section-note">
+                    Each tooltip is a flat sibling of its button — no wrapper with <code>position: relative</code>
+                    needed. <code>position-try-fallbacks: flip-block</code> auto-flips tooltips that would overflow
+                    the viewport edge.
+                </p>
+            </div>
+            <div class="demo-area toolbar">
+                <button class="tool-btn btn-undo" aria-label="Undo">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </button>
+                <div class="tooltip tooltip-undo" role="tooltip">Undo</div>
+
+                <button class="tool-btn btn-bold" aria-label="Bold">
+                    <i class="fa-solid fa-bold"></i>
+                </button>
+                <div class="tooltip tooltip-bold" role="tooltip">Bold</div>
+
+                <button class="tool-btn btn-italic" aria-label="Italic">
+                    <i class="fa-solid fa-italic"></i>
+                </button>
+                <div class="tooltip tooltip-italic" role="tooltip">Italic</div>
+
+                <button class="tool-btn btn-link" aria-label="Insert Link">
+                    <i class="fa-solid fa-link"></i>
+                </button>
+                <div class="tooltip tooltip-link" role="tooltip">Insert Link</div>
+
+                <button class="tool-btn btn-image" aria-label="Insert Image">
+                    <i class="fa-solid fa-image"></i>
+                </button>
+                <div class="tooltip tooltip-image" role="tooltip">Insert Image</div>
+            </div>
+        </section>
+
+        
+        <!-- ─── Pattern 2: Form Validation ─── -->
+        <section class="section">
+            <div class="section-header">
+                <p class="section-label">Pattern 2</p>
+                <h2 class="section-title">Form Validation</h2>
+                <p class="section-note">
+                    The error messages live in a separate <code>&lt;div&gt;</code> outside the
+                    <code>&lt;form&gt;</code> entirely — scroll down to see it in the source. Anchor
+                    positioning places them below their inputs regardless.
+                </p>
+            </div>
+            <div class="demo-area">
+                <form id="contact-form" novalidate>
+                    <div class="field">
+                        <label for="name-input">Name</label>
+                        <input id="name-input" class="form-input name-input"
+                        type="text" autocomplete="name" placeholder="Ada Lovelace">
+                    </div>
+                    <div class="field">
+                        <label for="email-input">Email</label>
+                        <input id="email-input" class="form-input email-input"
+                        type="email" autocomplete="email" placeholder="ada@babbage.io">
+                    </div>
+                    <button type="submit" class="btn-primary" id="submit-btn">Send</button>
+                </form>
+            </div>
+        </section>
+        
+        <!-- ─── Pattern 3: Dropdown ─── -->
+        <section class="section">
+            <div class="section-header">
+                <p class="section-label">Pattern 3</p>
+                <h2 class="section-title">Dropdown</h2>
+                <p class="section-note">
+                    The Popover API wires open/close with zero JavaScript. Anchor positioning places
+                    the menu below the button regardless of scroll position or DOM location.
+                    Press <code>Esc</code> to dismiss.
+                </p>
+            </div>
+            <div class="demo-area">
+                <button class="btn-primary view-button" popovertarget="view-menu">
+                    View <i class="fa-solid fa-chevron-down" style="font-size: .75em;"></i>
+                </button>
+            </div>
+
+            <!-- The menu lives outside the demo-area — it still anchors to the button above -->
+            <ul id="view-menu" popover>
+                <li class="active">
+                    <button popovertarget="view-menu" popovertargetaction="hide" data-value="editor">
+                        <i class="fa-solid fa-check"></i> Editor
+                    </button>
+                </li>
+                <li>
+                    <button popovertarget="view-menu" popovertargetaction="hide" data-value="preview">
+                        <i class="fa-solid fa-check"></i> Preview
+                    </button>
+                </li>
+                <li>
+                    <button popovertarget="view-menu" popovertargetaction="hide" data-value="split">
+                        <i class="fa-solid fa-check"></i> Split
+                    </button>
+                </li>
+                <li>
+                    <button popovertarget="view-menu" popovertargetaction="hide" data-value="zen">
+                        <i class="fa-solid fa-check"></i> Zen Mode
+                    </button>
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Error layer — lives completely outside the form and its section -->
+    <div class="error-layer" aria-live="polite">
+        <div class="error-msg error-name" id="error-name">Name is required.</div>
+        <div class="error-msg error-email" id="error-email">Valid email address required.</div>
+    </div>
+
+    <script>
+        // ─── Pattern 2: Dropdown active state ───
+        document.querySelectorAll('#view-menu li button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#view-menu li').forEach(li => li.classList.remove('active'));
+                btn.closest('li').classList.add('active');
+            });
+        });
+
+        // ─── Pattern 3: Form Validation ───
+        const form = document.getElementById('contact-form');
+        const nameInput = document.getElementById('name-input');
+        const emailInput = document.getElementById('email-input');
+        const submitBtn = document.getElementById('submit-btn');
+        const errorName = document.getElementById('error-name');
+        const errorEmail = document.getElementById('error-email');
+
+        let submitted = false;
+
+        function validateField(input, errorEl, isValid) {
+            if (isValid) {
+                input.classList.remove('is-invalid');
+                input.classList.add('is-valid');
+                errorEl.classList.remove('visible');
+            } else {
+                input.classList.remove('is-valid');
+                input.classList.add('is-invalid');
+                errorEl.classList.add('visible');
+            }
+            return isValid;
+        }
+
+        function validate() {
+            const nameOk = validateField(nameInput, errorName, nameInput.value.trim().length > 0);
+            const emailOk = validateField(emailInput, errorEmail,
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim()));
+            return nameOk && emailOk;
+        }
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            submitted = true;
+            if (validate()) {
+                submitBtn.textContent = 'Sent';
+                submitBtn.disabled = true;
+                nameInput.classList.remove('is-valid');
+                emailInput.classList.remove('is-valid');
+                form.reset();
+                submitted = false;
+                setTimeout(() => {
+                    submitBtn.textContent = 'Send';
+                    submitBtn.disabled = false;
+                }, 2000);
+            }
+        });
+
+        // Re-validate live after first submit attempt
+        [nameInput, emailInput].forEach(input => {
+            input.addEventListener('input', () => {
+                if (submitted) validate();
+            });
+        });
+    </script>
+</body>
+
+</html>
