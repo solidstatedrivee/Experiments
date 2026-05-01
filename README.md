@@ -27,6 +27,9 @@ A side-by-side comparison of `:has(:not(img))` and `:not(:has(img))` to illustra
 ### `nth-child-of-s`
 Demo of the `nth-child(An+B of S)` selector syntax, which allows counting only elements that match a specific selector. Paired with a JS-driven category filter to show how CSS handles re-indexing filtered items.
 
+### `overscroll-behavior-contain`
+Demonstrates `overscroll-behavior: contain` across four real-world contexts — chat panel, modal, horizontal carousel, and a live toggle — showing how the property prevents scroll from chaining to the parent when a nested container reaches its boundary.
+
 ### `reading-flow-example`
 Explores the `reading-flow` CSS property, which controls the logical tab/focus order of items in a grid or flex layout — useful when visual order differs from source order.
 
