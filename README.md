@@ -18,6 +18,9 @@ Using CSS attribute selectors to differentiate internal vs. external links — s
 ### `container-type-scroll-state`
 A CSS-only Back to Top button driven by a scroll-state container query. Uses `container-type: scroll-state` on the `<html>` element and `@container scroll-state(scrollable: top)` to slide the button in and out as the user scrolls — no JavaScript required.
 
+### `contrast-color`
+A native CSS function that returns `black` or `white` — whichever has higher contrast against the given color — with no JavaScript or build-time computation required.
+
 ### `css-shape-function`
 Uses the CSS `shape()` function to define curved, organic, and angled clip-path and motion-path shapes directly in CSS — no SVG required.
 
